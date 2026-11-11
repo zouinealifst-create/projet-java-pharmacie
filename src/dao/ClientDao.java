@@ -54,15 +54,15 @@ public class ClientDao {
     
     
     public void modifier(Client c) throws SQLException {
-        
         String sql = "UPDATE Client SET nom=?, prenom=?, telephone=?, adresse=? WHERE id=?";
-        PreparedStatement ps = Utilitaire.getConnection().prepareStatement(sql);
-        ps.setString(1, c.getNom());
-        ps.setString(2, c.getPrenom());
-        ps.setString(3, c.getTelephone());
-        ps.setString(4, c.getAdresse());
-        ps.setInt(5, c.getId());
-        ps.executeUpdate();
+        try (PreparedStatement ps = Utilitaire.getConnection().prepareStatement(sql)) {
+            ps.setString(1, c.getNom());
+            ps.setString(2, c.getPrenom());
+            ps.setString(3, c.getTelephone());
+            ps.setString(4, c.getAdresse());
+            ps.setInt(5, c.getId());
+            ps.executeUpdate();
+        }
     }
 
 

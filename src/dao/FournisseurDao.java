@@ -49,13 +49,13 @@ public class FournisseurDao {
     }
     
     public void modifier(Fournisseur f) throws SQLException {
-        
-        String sql = "UPDATE Fournisseur SET nomSociete=?, adresse=?  , contact=? WHERE id=?";
-        PreparedStatement ps = Utilitaire.getConnection().prepareStatement(sql);
-        ps.setString(1, f.getNomSociete());
-        ps.setString(2, f.getAdresse());
-        ps.setString(3, f.getContact());
-        ps.setInt(4, f.getId()); 
-        ps.executeUpdate();
+        String sql = "UPDATE Fournisseur SET nomSociete=?, adresse=?, contact=? WHERE id=?";
+        try (PreparedStatement ps = Utilitaire.getConnection().prepareStatement(sql)) {
+            ps.setString(1, f.getNomSociete());
+            ps.setString(2, f.getAdresse());
+            ps.setString(3, f.getContact());
+            ps.setInt(4, f.getId());
+            ps.executeUpdate();
+        }
     }
 }

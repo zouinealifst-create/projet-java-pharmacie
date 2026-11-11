@@ -223,8 +223,7 @@ public class VentePanel extends JPanel implements ActionListener {
         if (venteAValider == null) { ViewUtil.afficherErreur(this, "Vente introuvable."); return; }
 
         // ✅ Créer l'ordonnance maintenant (si cochée) et l'associer à la vente
-        // erreur déjà affichée
-        else if(chkOrdonnance.isSelected()) {
+        if (chkOrdonnance.isSelected()) {
             int idOrd = enregistrerOrdonnanceSiPresente(venteAValider.getIdClient());
             venteAValider.setIdOrdonnance(idOrd);
             venteController.modifierOrdo(venteAValider);
